@@ -1,42 +1,89 @@
-for(var i=2000; i<2018;i++){
-    $('.container').children('#year').append("<option class=newyear value="+i+">"+i+"</option>");
-}
-for(var i=1; i<13;i++){
-    $('.container').children('#month').append("<option class=option value="+i+">"+i+"</option>");
-}
+$(document).ready(function() {
 
-$(document).ready(function(){
+    $('.year').each(function() {
+        //prendo il div associato a questa iterazione
+        var thisYear = $(this);
 
-      $(document).on('click', $('#btn'), function(){
-        var state=$('.container').children('#country').children('.option:selected');
-        var correntyear=$('.container').children('#year').children('.newyear:selected');
-        thisState=state.val();
-        thisYear=correntyear.val();
+        //2018-04-19 11:32:00
+        var now = moment();
 
-          console.log(thisState);
+        var year = $(this).attr('id');
+        var month = now.format('M');
+        var day = now.format('D');
 
+        var date = moment(year + '-' + month + '-' + day);
+        //console.log(date);
 
+        $.ajax({
+            url: 'https://holidayapi.com/v1/holidays',
+            method: 'GET',
+            data: {
+                key: '6bb9c0f7-6861-4075-aff3-f465c85749c2',
+                country: 'IT',
+                month: month,
+                year: year,
+                day: day
+            },
+            success: function(data) {
+                if (data.holidays.length > 0) {
+                    thisYear.children('.result').text('Sì');
+                }
+                else {
+                    thisYear.children('.result').text('No');
+                }
+            },
+            error: function() {
+                alert('Si è verificato un errore');
+            }
+        });
 
+    });
 
-          $.ajax({
-              url:'https://holidayapi.com/v1/holidays',
-              method:'GET',
-              data:{
-                  key:'2c6965c6-0570-42d7-b76a-8e54095558ef',
-                  country:thisState,
-                  year:thisYear,
+    $('#myButton').click(function() {
+        var month = $('#months').val();
+        var year = $('#years').val();
+        var country = $('#countries').val();
 
-              },
+        $.ajax({
+            url: 'https://holidayapi.com/v1/holidays',
+            method: 'GET',
+            data: {
+                key: '6bb9c0f7-6861-4075-aff3-f465c85749c2',
+                country: country,
+                month: month,
+                year: year
+            },
+            success: function(data) {
 
-              success:function(data){
-                console.log(data);
+                for (var i = 0; i < data.holidays.length; i++) {
 
-              },
-              error: function(){
+                    //ti ritorno la data attuale in cui ti trovi
+                     //moment();
+                     //ti ritorno la data che mi chiedi
+                     //moment('2017-01-01');
 
-              }
-          });
+                    var dateOfHoliday = moment(data.holidays[i].date);
+                    var dayOfYear = dateOfHoliday.dayOfYear();
+                    var dayOfWeek = dateOfHoliday.format('dddd');
 
-      });
+                    //prendiamo l'ora attuale
+                    var now = moment();
+
+                    //prendiamo la prima data e guardiamo quanta differenza di giorni c'è con la seconda
+                    var diffInDays = now.diff(dateOfHoliday, 'minutes');
+
+                    $('#results').append(data.holidays[i]['date']);
+                    $('#results').append(' Giorno dell\'anno: ' + dayOfYear);
+                    $('#results').append(' Giorno della settimana: ' + dayOfWeek);
+                    $('#results').append(' Sono trascorsi ' + diffInDays + ' giorni');
+                    $('#results').append('<br>');
+                }
+
+            },
+            error: function() {
+                alert('Si è verificato un errore');
+            }
+        });
+    });
 
 });

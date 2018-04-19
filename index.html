@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
-    
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    </head>
+    <body>
 
+        <div class="container">
+            <div class="years-container">
+                <div id="2017" class="year">2017 <span class="result"></span></div>
+                <div id="2016" class="year">2016 <span class="result"></span></div>
+                <div id="2015" class="year">2015 <span class="result"></span></div>
+                <div id="2014" class="year">2014 <span class="result"></span></div>
+                <div id="2013" class="year">2013 <span class="result"></span></div>
+                <div id="2012" class="year">2012 <span class="result"></span></div>
+                <div id="2011" class="year">2011 <span class="result"></span></div>
+                <div id="2010" class="year">2010 <span class="result"></span></div>
+                <div id="2009" class="year">2009 <span class="result"></span></div>
+                <div id="2008" class="year">2008 <span class="result"></span></div>
+            </div>
+            <!-- Required -->
+            <select id="countries">
+                <option value="IT">Italia</option>
+                <option value="AR">Argentina</option>
+                <option value="BE">Belgio</option>
+            </select>
+            <!-- Required -->
+            <select id="years">
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+            </select>
+            <!-- Optional -->
+            <select id="months">
+                <option value="1">Gennaio</option>
+                <option value="2">Febbraio</option>
+                <option value="3">Marzo</option>
+                <option value="4">Aprile</option>
+                <option value="5">Maggio</option>
+                <option value="6">Giugno</option>
+                <option value="7">Luglio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Settembre</option>
+                <option value="10">Ottobre</option>
+                <option value="11">Novembre</option>
+                <option value="12">Dicembre</option>
+            </select>
+            <button id="myButton">Cerca</button>
 
+            <div id="results"></div>
+        </div>
 
-    <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
 
-  </head>
-  <body>
-      <div class="container">
-          <h3>Scegli una nazione dalla lista</h3>
-          <select id="country" class="" name="">
-              <option class="option" value="IT">IT</option>
-              <option class="option" value="ENG">ENG</option>
-              <option class="option" value="DE">DE</option>
-              <option class="option" value="FR">FR</option>
-              <option class="option" value="SE">SE</option>
-          </select>
-
-          <h3>Scegli l'anno desiderato</h3>
-          <select id="year" class="" name=""></select>
-          <h3>Scegli il mese desiderato</h3>
-          <select id="month" class="" name=""></select><br>
-          <button id="btn" type="button" name="button">Invia</button>
-
-
-
-
+    </body>
+</html>
 
 
 
